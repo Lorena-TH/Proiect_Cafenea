@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cafenea.GrpcStatus";
+
+package status;
+
+// Serviciul nostru de verificare
+service OrderStatus {
+  // Trimiti un ID de comanda, primesti inapoi detalii
+  rpc GetStatus (OrderRequest) returns (OrderReply);
+}
+
+// Ce trimite clientul (doar ID-ul comenzii)
+message OrderRequest {
+  int32 orderId = 1;
+}
+
+// Ce raspunde serverul
+message OrderReply {
+  string mesaj = 1;         // Ex: "Comanda este gata"
+  string timpEstimativ = 2; // Ex: "5 minute"
+  bool esteGata = 3;        // Pentru a colora textul in verde/rosu
+}
