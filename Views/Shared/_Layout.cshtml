@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cafenea Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+     
+        .sidebar-minimal {
+            min-width: 80px;
+            max-width: 80px;
+            background-color: #1a1a1a; 
+            color: white;
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+       
+            .sidebar-minimal:hover {
+                min-width: 240px;
+                max-width: 240px;
+                box-shadow: 10px 0 20px rgba(0,0,0,0.3);
+            }
+
+        .logo-section {
+            padding: 20px;
+            white-space: nowrap;
+            border-bottom: 1px solid #343a40;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .sidebar-minimal:hover .logo-text {
+            opacity: 1;
+        }
+
+        .sidebar-link {
+            color: #adb5bd;
+            text-decoration: none;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+            .sidebar-link i {
+                font-size: 1.4rem;
+                min-width: 30px;
+                margin-right: 25px;
+            }
+
+        .link-text {
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .sidebar-minimal:hover .link-text {
+            opacity: 1;
+        }
+
+      
+        .sidebar-link:hover {
+            background-color: #3e2723;
+            color: #A65E2E; 
+        }
+
+        .sidebar-link.active {
+            background-color: #3e2723;
+            color: white;
+            border-left: 4px solid #A65E2E;
+        }
+
+      
+        main {
+            margin-left: 80px;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+      
+         .sidebar-minimal:hover + main { margin-left: 240px; } 
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-0">
+        <div class="d-flex">
+            <nav class="sidebar-minimal d-none d-md-block">
+                
+                <div class="nav flex-column mt-2">
+                    <a class="sidebar-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
+                       asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-speedometer2"></i>
+                        <span class="link-text">Dashboard</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="Categorii" asp-action="Index">
+                        <i class="bi bi-tags"></i>
+                        <span class="link-text">Categorii</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="Produse" asp-action="Index">
+                        <i class="bi bi-cup-hot"></i>
+                        <span class="link-text">Produse</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="Clienti" asp-action="Index">
+                        <i class="bi bi-people"></i>
+                        <span class="link-text">Clienți</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="Comenzi" asp-action="Index">
+                        <i class="bi bi-cart-check"></i>
+                        <span class="link-text">Comenzi</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="DetaliiComenzi" asp-action="Index">
+                        <i class="bi bi-list-check"></i>
+                        <span class="link-text">Detalii Comenzi</span>
+                    </a>
+                    <a class="sidebar-link" asp-controller="Recomandari" asp-action="Index">
+                        <i class="bi bi-magic"></i>
+                        <span class="link-text">Recomandări</span>
+                    </a>
+                    <hr class="mx-3" style="border-top: 1px solid #444;">
+                    <a class="sidebar-link" asp-controller="Home" asp-action="Privacy">
+                        <i class="bi bi-shield-lock"></i>
+                        <span class="link-text">Privacy</span>
+                    </a>
+                </div>
+            </nav>
+
+            <main class="flex-grow-1 px-md-4">
+                <div class="pt-4 pb-3">
+                    @RenderBody()
+                </div>
+
+                <footer class="pt-5 pb-4 text-muted border-top mt-5 text-center">
+                    &copy; 2026 - Sistem de gestiune
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

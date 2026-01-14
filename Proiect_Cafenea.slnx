@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../Cafenea.GrpcStatus/Cafenea.GrpcStatus.csproj" Id="7a3ecc0c-7a1f-4490-bcdc-7008f4dd0fc8" />
+  <Project Path="../RecomandareProduse_WebAPI/RecomandareProduse_WebAPI.csproj" />
+  <Project Path="Proiect_Cafenea.csproj" />
+</Solution>

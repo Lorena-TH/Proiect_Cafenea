@@ -1,0 +1,142 @@
+﻿@model Proiect_Cafenea.Models.DetaliiComanda
+
+@{
+    ViewData["Title"] = "Adaugă Produs la Comandă";
+}
+
+<style>
+    
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+   
+    .form-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+ 
+    .control-label {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        display: block;
+        color: #4e342e;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    
+    .input-premium {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #d7ccc8;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #3e2723;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .input-premium:focus {
+            border-color: #a1887f;
+            outline: none;
+            box-shadow: 0 0 8px rgba(161, 136, 127, 0.3);
+        }
+
+ 
+    .btn-brown {
+        background-color: #3e2723;
+        color: #fff !important;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+        }
+
+    .link-back {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #8d6e63;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Adaugă Produs</h1>
+    <p class="text-muted fst-italic">Completează detaliile </p>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group">
+                <label asp-for="ComandaId" class="control-label">ID Comandă</label>
+                <select asp-for="ComandaId" class="input-premium" asp-items="ViewBag.ComandaId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProdusId" class="control-label">Selectează produs</label>
+                <select asp-for="ProdusId" class="input-premium" asp-items="ViewBag.ProdusId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cantitate" class="control-label">Cantitate</label>
+                <input asp-for="Cantitate"
+                       class="input-premium"
+                       type="number"
+                       min="1"
+                       step="1"
+                       value="1"
+                       oninput="if(this.value < 1) this.value = 1;" />
+                <span asp-validation-for="Cantitate" class="text-danger"></span>
+            </div>
+
+            <div class="actions-footer" style="margin-top: 30px;">
+                <button type="submit" class="btn-brown">Înregistrează detaliu</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="link-back">← Înapoi la listă</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="height: 100px;"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

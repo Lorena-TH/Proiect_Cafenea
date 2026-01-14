@@ -1,0 +1,193 @@
+﻿@model DashboardViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Gestiune Cafenea";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    .font-titlu {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+        color: #3e2723;
+    }
+
+  
+    .stat-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        transition: transform 0.3s;
+        box-shadow: 0 4px 10px rgba(62, 39, 35, 0.05);
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #3e2723;
+        display: block;
+    }
+
+    .stat-label {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #8d6e63;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+   
+    .chart-container {
+        background-color: #ffffff;
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        padding: 40px;
+        margin-bottom: 50px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+   
+    .legend-item {
+        border-bottom: 1px dashed #d7ccc8;
+        padding: 12px 0;
+    }
+
+    .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .legend-name {
+        font-weight: bold;
+        color: #4e342e;
+    }
+
+    .legend-value {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+        color: #3e2723;
+        float: right;
+    }
+</style>
+
+<div class="text-center py-5">
+    <h1 class="display-4 font-titlu">Gestiune Cafenea</h1>
+    <p class="lead mb-5 text-muted fst-italic">Panou de control administrativ și încasări în timp real</p>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <span class="stat-number">@Model.TotalClienti</span>
+                <span class="stat-label">Clienți fideli</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <span class="stat-number">@Model.TotalComenzi</span>
+                <span class="stat-label">Comenzi înregistrate</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <span class="stat-number">@Model.TotalProduse</span>
+                <span class="stat-label">Produse în meniu</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="chart-container">
+                <h3 class="font-titlu mb-4 text-center" style="font-size: 1.4rem;">Venituri pe Categorii (RON)</h3>
+
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div style="height: 280px; position: relative;">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 px-4">
+                        <div id="custom-legend">
+                            @for (int i = 0; i < Model.CategoriiStats.Count; i++)
+                            {
+                                var item = Model.CategoriiStats[i];
+                                <div class="legend-item" style="border-bottom: 1px dashed #d7ccc8; padding: 10px 0;">
+                                    <span class="legend-dot" data-index="@i" style="width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
+                                    <span style="font-weight: bold; color: #4e342e;">@item.NumeCategorie</span>
+                                    <span style="font-family: 'Playfair Display', serif; font-weight: 800; color: #3e2723; float: right;">@item.NumarProduse.ToString("N0") RON</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div style="height: 100px;"></div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+
+       
+        const colors = ['#3e2723', '#A65E2E', '#8d6e63', '#d7ccc8', '#a1887f'];
+
+        document.querySelectorAll('.legend-dot').forEach((dot, index) => {
+            dot.style.backgroundColor = colors[index % colors.length];
+        });
+
+        const labels = @Html.Raw(JsonSerializer.Serialize(Model.CategoriiStats.Select(s => s.NumeCategorie)));
+        const dataValues = @Html.Raw(JsonSerializer.Serialize(Model.CategoriiStats.Select(s => s.NumarProduse)));
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: dataValues,
+                    backgroundColor: colors,
+                    borderWidth: 3,
+                    borderColor: '#ffffff',
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%', 
+                plugins: {
+                    legend: {
+                        display: false 
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw.toLocaleString('ro-RO') + ' RON';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

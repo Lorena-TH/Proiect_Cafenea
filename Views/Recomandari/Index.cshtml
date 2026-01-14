@@ -1,0 +1,222 @@
+﻿@model IEnumerable<Proiect_Cafenea.Models.RecomandarePredictionViewModel>
+
+@{
+    ViewData["Title"] = "Recomandări Inteligente";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+ 
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    h1, h2, h3, .font-titlu {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+    }
+
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+
+    .selection-bar {
+        background-color: #efebe9;
+        padding: 25px;
+        border-radius: 8px;
+        border: 1px solid #d7ccc8;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.05);
+    }
+
+    .custom-select {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: 1px solid #a1887f;
+        background-color: #ffffff;
+        color: #3e2723;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .btn-espresso {
+        background-color: #3e2723;
+        color: #fff !important;
+        border: none;
+        padding: 12px 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 4px;
+        transition: 0.3s;
+        cursor: pointer;
+        letter-spacing: 1px;
+    }
+
+        .btn-espresso:hover {
+            background-color: #5d4037;
+        }
+
+
+    .recom-strip {
+        background-color: #ffffff;
+        border: 1px solid #d7ccc8;
+        border-left: 8px solid #3e2723;
+        border-radius: 8px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        transition: transform 0.3s;
+    }
+
+        .recom-strip:hover {
+            transform: translateX(10px);
+            border-color: #a1887f;
+        }
+
+    .strip-rank-1 {
+        border-left-color: #A65E2E;
+    }
+
+    .rank-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #d7ccc8;
+        margin-right: 20px;
+    }
+
+    .strip-rank-1 .rank-number {
+        color: #A65E2E;
+    }
+
+    .produs-info h3 {
+        margin: 0;
+        color: #3e2723;
+        font-size: 1.5rem;
+    }
+
+    .produs-categorie {
+        color: #8d6e63;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .scor-val {
+        font-weight: 800;
+        color: #3e2723;
+        font-size: 1.2rem;
+    }
+
+    
+    .btn-why-small {
+        background: #efebe9;
+        border: 1px solid #d7ccc8;
+        color: #4e342e;
+        padding: 6px 15px;
+        font-size: 0.8rem;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer; 
+        transition: 0.2s;
+    }
+
+        .btn-why-small:hover {
+            background-color: #d7ccc8;
+        }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Recomandări inteligente</h1>
+    <p class="text-muted fst-italic">Analiză AI bazată pe istoricul comenzilor</p>
+</div>
+
+<div class="container">
+    <div class="selection-bar">
+        <form asp-action="Index" method="post" class="d-flex gap-3 w-100" style="max-width: 800px;">
+            <select name="clientId" class="custom-select" asp-items="ViewBag.Clienti">
+                <option value="">-- Alege un client pentru analiză --</option>
+            </select>
+
+            <button type="submit" class="btn-espresso">
+                Generează oferta
+            </button>
+        </form>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div style="text-align:center; margin-bottom:40px;">
+            <h2 class="font-titlu" style="color:#3e2723;">Selecții personalizate</h2>
+        </div>
+
+        <div class="results-list" style="max-width: 900px; margin: 0 auto;">
+            @{
+                int rank = 1;
+            }
+            @foreach (var item in Model)
+            {
+                string rankClass = rank == 1 ? "strip-rank-1" : "";
+
+                <div class="recom-strip @rankClass">
+                    <div class="d-flex align-items-center">
+                        <div class="rank-number">#@rank</div>
+                        <div class="produs-info">
+                            <h3>@item.NumeProdus</h3>
+                            <span class="produs-categorie">@item.Categorie</span>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right;">
+                        <div class="mb-2">
+                            <small class="text-muted">Scor AI:</small>
+                            <span class="scor-val">@item.Scor.ToString("0.00")</span>
+                        </div>
+
+                        <button type="button"
+                                class="btn-why-small"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                title="De ce această recomandare?"
+                                data-bs-content="@item.Motivatie">
+                            ℹ️ Motiv recomandare
+                        </button>
+                    </div>
+                </div>
+                rank++;
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center p-5" style="border: 2px dashed #d7ccc8; background: #efebe9; border-radius: 10px;">
+            <p class="text-muted">Selectați un client pentru a vedea ce produse i s-ar potrivi.</p>
+        </div>
+    }
+</div>
+
+<div style="height: 100px;"></div>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
+            })
+        });
+    </script>
+}

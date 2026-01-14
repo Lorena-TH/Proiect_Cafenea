@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cafenea.GrpcStatus";
+
+package status;
+
+
+service OrderStatus {
+  
+  rpc GetStatus (OrderRequest) returns (OrderReply);
+}
+
+
+message OrderRequest {
+  int32 orderId = 1;
+}
+
+
+message OrderReply {
+  string mesaj = 1;         
+  string timpEstimativ = 2; 
+  bool esteGata = 3;       
+}

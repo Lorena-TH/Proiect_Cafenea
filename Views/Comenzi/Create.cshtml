@@ -1,0 +1,161 @@
+﻿@model Proiect_Cafenea.Models.Comanda
+
+@{
+    ViewData["Title"] = "Creare Comandă";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+   
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    h1, .font-titlu {
+        font-family: 'Cinzel Decorative', cursive;
+    }
+
+   
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+    
+    .form-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 0 auto; 
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+
+    .form-group {
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    .control-label {
+        font-family: 'Cinzel Decorative', cursive;
+        color: #5d4037;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .input-premium {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #d7ccc8;
+        border-radius: 4px;
+        background-color: #fff;
+        font-family: 'Merriweather', serif;
+        color: #3e2723;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .input-premium:focus {
+            border-color: #a1887f;
+            outline: none;
+            box-shadow: 0 0 8px rgba(161, 136, 127, 0.3);
+        }
+
+    
+    .text-danger {
+        color: #c62828 !important;
+        font-size: 0.85rem;
+        font-style: italic;
+        margin-top: 5px;
+        display: block;
+    }
+
+   
+    .actions-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-brown {
+        background-color: #3e2723;
+        color: #ffca28;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+            color: #fff;
+        }
+
+    .link-back {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #8d6e63;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+        .link-back:hover {
+            color: #3e2723;
+            text-decoration: underline;
+        }
+
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Comandă Nouă</h1>
+    <p class="text-muted fst-italic">Înregistrează o nouă tranzacție</p>
+</div>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group">
+                <label asp-for="DataComanda" class="control-label">Data și Ora</label>
+                <input asp-for="DataComanda" class="input-premium" />
+                <span asp-validation-for="DataComanda" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label">Client</label>
+                <select asp-for="ClientId" class="input-premium" asp-items="ViewBag.ClientId"></select>
+            </div>
+
+            <div class="actions-footer">
+                <input type="submit" value="Crează Comanda" class="btn-brown" />
+            </div>
+
+            <a asp-action="Index" class="link-back">← Înapoi la listă</a>
+        </form>
+
+    </div>
+
+</div>
+<div style="height: 100px;"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

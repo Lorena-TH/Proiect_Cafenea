@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Gestiune Stocuri";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+  
+    .font-titlu {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+    }
+
+    
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+   
+    .status-card {
+        background-color: #efebe9; 
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+        text-align: center;
+    }
+
+    
+    .input-premium {
+        padding: 12px;
+        border: 1px solid #d7ccc8;
+        border-radius: 4px;
+        width: 65%;
+        margin-right: 10px;
+        background-color: white;
+        color: #3e2723;
+        transition: border-color 0.3s;
+    }
+
+        .input-premium:focus {
+            border-color: #a1887f;
+            outline: none;
+        }
+
+ 
+    .btn-espresso {
+        background-color: #3e2723;
+        color: #fff !important;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .btn-espresso:hover {
+            background-color: #5d4037;
+        }
+
+    
+    .result-box {
+        margin-top: 30px;
+        padding: 25px;
+        border-radius: 8px;
+        background-color: #fff;
+        border-left: 6px solid #3e2723;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+
+    .status-ready {
+        border-left-color: #2e7d32;
+    }
+
+    .status-pending {
+        border-left-color: #c62828;
+    }
+
+ 
+    .link-back {
+        color: #8d6e63;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+        .link-back:hover {
+            color: #3e2723;
+            text-decoration: underline;
+        }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Gestiune Stocuri</h1>
+    <p class="text-muted fst-italic">Verificare disponibilitate prin serviciu gRPC</p>
+</div>
+
+<div class="container mt-4">
+    <div class="status-card">
+        <h2 class="font-titlu" style="font-size: 1.8rem; color:#3e2723; margin-bottom: 20px;">Verifică disponibilitatea</h2>
+
+        <form asp-controller="Status" asp-action="Verifica" method="get">
+            <select name="orderId" class="input-premium" required>
+                <option value="">-- Alege un produs --</option>
+                @if (ViewBag.Produse != null)
+                {
+                    foreach (var p in (IEnumerable<Proiect_Cafenea.Models.Produs>)ViewBag.Produse)
+                    {
+                        if (ViewBag.Cautare != null && (int)ViewBag.Cautare == p.Id)
+                        {
+                            <option value="@p.Id" selected>@p.Nume</option>
+                        }
+                        else
+                        {
+                            <option value="@p.Id">@p.Nume</option>
+                        }
+                    }
+                }
+            </select>
+            <button type="submit" class="btn-espresso">Verifică</button>
+        </form>
+
+        @if (ViewBag.Rezultat != null)
+        {
+            var r = (dynamic)ViewBag.Rezultat;
+            var cssClass = r.EsteGata ? "status-ready" : "status-pending";
+            var icon = r.EsteGata ? "✅" : "❌";
+
+            <div class="result-box @cssClass">
+                <h3 class="font-titlu" style="font-size: 1.1rem; color: #8d6e63; text-transform: uppercase;">
+                    Rezultat: @ViewBag.NumeProdus
+                </h3>
+                <hr style="border-top: 1px solid #eee; margin: 15px 0;" />
+                <p style="font-size: 1.2rem; font-weight: bold; color: #3e2723; margin-bottom: 10px;">
+                    @icon @r.Mesaj
+                </p>
+                <p style="margin-bottom: 0; color: #5d4037; font-size: 0.95rem;">
+                    Status logistic: <strong>@r.TimpEstimativ</strong>
+                </p>
+            </div>
+
+            <div class="mt-4">
+                <a asp-controller="Produse" asp-action="Index" class="link-back">
+                    ← Înapoi la listă produse
+                </a>
+            </div>
+        }
+
+        @if (ViewBag.Eroare != null)
+        {
+            <div class="alert alert-danger mt-4" style="border-radius: 4px; font-size: 0.9rem;">
+                <strong>Eroare conexiune:</strong> @ViewBag.Eroare
+            </div>
+        }
+    </div>
+</div>
+
+<div style="height: 100px;"></div>

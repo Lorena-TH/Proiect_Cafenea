@@ -1,0 +1,106 @@
+﻿@model Proiect_Cafenea.Models.Client
+
+@{
+    ViewData["Title"] = "Înregistrare Client";
+}
+
+<style>
+    
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+    
+    .form-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+   
+    .control-label {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: block;
+        color: #4e342e;
+    }
+
+    
+    .input-premium {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #d7ccc8;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #3e2723;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .input-premium:focus {
+            border-color: #a1887f;
+            outline: none;
+            box-shadow: 0 0 8px rgba(161, 136, 127, 0.3);
+        }
+
+   
+    .text-danger {
+        font-size: 0.85rem;
+        font-style: italic;
+    }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Înregistrare Client</h1>
+    <p class="text-muted fst-italic">Adaugă un nou membru în comunitatea cafenelei</p>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group">
+                <label asp-for="Nume" class="control-label">Nume Complet</label>
+                <input asp-for="Nume" class="input-premium" placeholder="Ex: Ion Popescu" />
+                <span asp-validation-for="Nume" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Adresă Email</label>
+                <input asp-for="Email" class="input-premium" placeholder="exemplu@mail.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="actions-footer" style="margin-top: 30px;">
+                <input type="submit" value="Înregistrează Clientul" class="btn-brown" style="width: 100%;" />
+            </div>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="link-mic" style="color: #8d6e63; text-decoration: none;">← Înapoi la listă</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="height: 100px;"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

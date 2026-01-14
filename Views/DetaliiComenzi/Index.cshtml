@@ -1,0 +1,195 @@
+﻿@model IEnumerable<Proiect_Cafenea.Models.DetaliiComanda>
+
+@{
+    ViewData["Title"] = "Listă Detalii Comenzi";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+    
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    h1, .font-titlu {
+        font-family: 'Cinzel Decorative', cursive;
+    }
+
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+ 
+    .actions-bar {
+        background-color: #efebe9;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #d7ccc8;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(62, 39, 35, 0.05);
+    }
+
+  
+    .btn-brown {
+        background-color: #3e2723;
+        color: #ffca28;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+        text-transform: uppercase;
+        display: inline-block;
+        font-size: 0.9rem;
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+            color: #fff;
+        }
+
+   
+    .table-container {
+        background-color: #fff8e1;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(62, 39, 35, 0.1);
+        border: 1px solid #d7ccc8;
+    }
+
+    .premium-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+       
+        .premium-table thead {
+            background-color: #3e2723;
+            color: #ffca28;
+        }
+
+        .premium-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-family: 'Merriweather', serif; 
+            font-weight: 700;
+            font-size: 1rem;
+            border-bottom: 3px solid #a1887f;
+        }
+
+       
+        .premium-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #d7ccc8;
+            color: #3e2723;
+            vertical-align: middle;
+        }
+
+        .premium-table tbody tr:hover {
+            background-color: #efebe9;
+            transition: background-color 0.2s;
+        }
+
+        .premium-table .actions-col {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+    .link-action {
+        color: #8d6e63;
+        text-decoration: none;
+        font-weight: bold;
+        margin-left: 15px;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+   
+    .link-mic {
+        color: #8d6e63;
+        text-decoration: none;
+        margin: 0 4px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+        .link-mic:hover {
+            color: #3e2723;
+            text-decoration: underline;
+        }
+
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-3 font-titlu" style="color:#3e2723;">Detaliile comenzilor</h1>
+    <p class="text-muted fst-italic">Listă completă a comenzilor din sistem</p>
+</div>
+
+<div class="container">
+
+    <div class="actions-bar">
+        <a asp-action="Create" class="btn-brown">
+            + Adaugă detalii noi
+        </a>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-container">
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>Comanda #</th>
+                        <th>Produs</th>
+                        <th>Cantitate</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-weight: bold;">
+                                #@Html.DisplayFor(modelItem => item.Comanda.Id)
+                            </td>
+
+                            <td style="font-style: italic; color: #5d4037;">
+                                @Html.DisplayFor(modelItem => item.Produs.Nume)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantitate) buc.
+                            </td>
+
+                            <td style="text-align: right;">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="link-mic">Editează</a>
+                                <span style="color:#ccc">|</span>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="link-mic">Detalii</a>
+                                <span style="color:#ccc">|</span>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="link-mic" style="color:#c62828">Șterge</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mt-5 p-5" style="border: 2px dashed #d7ccc8; background: #fff8e1; border-radius: 10px;">
+            <h3 class="font-titlu" style="color: #5d4037;">Nu există detalii înregistrate.</h3>
+        </div>
+    }
+
+</div>
+<div style="height: 100px;"></div>

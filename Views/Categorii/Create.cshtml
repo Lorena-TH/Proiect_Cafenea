@@ -1,0 +1,157 @@
+﻿@model Proiect_Cafenea.Models.Categorie
+
+@{
+    ViewData["Title"] = "Adaugă categorie";
+}
+
+
+
+<style>
+   
+    body {
+       
+        color: #4e342e;
+    }
+
+    h1, h4, .font-titlu {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+   
+    .form-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 8px;
+        max-width: 500px; 
+        margin: 0 auto; 
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+
+    .form-group {
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    .control-label {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .input-premium {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #d7ccc8;
+        border-radius: 4px;
+        background-color: #fff;
+ 
+        color: #3e2723;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .input-premium:focus {
+            border-color: #a1887f;
+            outline: none;
+            box-shadow: 0 0 8px rgba(161, 136, 127, 0.3);
+        }
+
+    /*mesaj de eroare*/
+    .text-danger {
+        color: #c62828 !important;
+        font-size: 0.85rem;
+        font-style: italic;
+        margin-top: 5px;
+        display: block;
+    }
+
+    /*butoane */
+    .actions-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn-brown {
+        background-color: #3e2723;
+        color: #ffca28;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%; 
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+            color: #fff;
+        }
+
+    .link-back {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #8d6e63;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+        .link-back:hover {
+            color: #3e2723;
+            text-decoration: underline;
+        }
+
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Creare categorie</h1>
+    <p class="text-muted fst-italic">Definește o nouă secțiune în meniu</p>
+</div>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group">
+                <label asp-for="Nume" class="control-label">Numele categoriei</label>
+                <input asp-for="Nume" class="input-premium" placeholder="Ex: Băuturi reci" />
+                <span asp-validation-for="Nume" class="text-danger"></span>
+            </div>
+
+            <div class="actions-footer">
+                <input type="submit" value="Salvează categoria" class="btn-brown" />
+            </div>
+
+            <a asp-action="Index" class="link-back">← Înapoi la listă</a>
+
+        </form>
+
+    </div>
+
+</div>
+<div style="height: 100px;"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

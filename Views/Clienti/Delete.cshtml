@@ -1,0 +1,98 @@
+﻿@model Proiect_Cafenea.Models.Client
+
+@{
+    ViewData["Title"] = "Ștergere Client";
+}
+
+<style>
+   
+    .warning-text {
+        color: #c62828;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .delete-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        max-width: 550px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+        text-align: center;
+    }
+
+    
+    .detail-box {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 1px dashed #d7ccc8;
+        text-align: left;
+    }
+
+    .detail-item {
+        margin-bottom: 10px;
+    }
+
+    .detail-label {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+        color: #4e342e;
+        font-size: 1rem;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .detail-value {
+        font-size: 1.2rem;
+        color: #3e2723;
+        display: block;
+    }
+</style>
+
+<div class="page-header-container" style="text-align: center; padding: 40px 0;">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Ștergere Client</h1>
+    <p class="text-muted fst-italic">Această acțiune va elimina definitiv datele clientului</p>
+</div>
+
+<div class="container">
+    <div class="delete-card">
+        <h3 class="warning-text">Ești sigur că vrei să ștergi acest client?</h3>
+
+        <div class="detail-box">
+            <div class="detail-item">
+                <span class="detail-label">Nume Client</span>
+                <span class="detail-value">@Model.Nume</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">@Model.Email</span>
+            </div>
+        </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="actions-footer" style="display: flex; flex-direction: column; gap: 10px;">
+          
+                <button type="submit" class="btn-brown" style="background-color: #c62828 !important; width: 100%; color: white !important;">
+                    CONFIRMĂ ȘTERGEREA
+                </button>
+
+            
+                <div class="text-center mt-2">
+                    <a asp-action="Index" style="color: #8d6e63; text-decoration: none; font-size: 0.9rem; font-family: 'Montserrat', sans-serif;">
+                        ← Înapoi la listă
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="height: 100px;"></div>

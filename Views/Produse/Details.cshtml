@@ -1,0 +1,99 @@
+﻿@model Proiect_Cafenea.Models.Produs
+
+@{
+    ViewData["Title"] = "Detalii Produs";
+}
+
+<style>
+   
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+    
+    .details-card {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 12px;
+        max-width: 550px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    }
+
+   
+    .info-group {
+        margin-bottom: 25px;
+        text-align: left;
+        border-bottom: 1px dashed #d7ccc8;
+        padding-bottom: 10px;
+    }
+
+  
+    .info-label {
+        font-family: 'Playfair Display', serif;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #4e342e;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .info-value {
+        font-size: 1.4rem;
+        color: #3e2723;
+        display: block;
+    }
+
+   
+    .price-highlight {
+        color: #A65E2E;
+        font-weight: 700;
+    }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-4 font-titlu" style="color:#3e2723;">Detalii Produs</h1>
+    <p class="text-muted fst-italic">Informații complete despre selecția din meniu</p>
+</div>
+
+<div class="container">
+    <div class="details-card">
+
+        <div class="info-group">
+            <span class="info-label">Nume Produs</span>
+            <span class="info-value">@Model.Nume</span>
+        </div>
+
+        <div class="info-group">
+            <span class="info-label">Preț</span>
+            <span class="info-value price-highlight">@Model.Pret.ToString("0.00") RON</span>
+        </div>
+
+        <div class="info-group">
+            <span class="info-label">Categorie</span>
+            <span class="info-value">@Model.Categorie?.Nume</span>
+        </div>
+
+     
+        <div class="actions-footer" style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px;">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-brown">
+                Editează Produsul
+            </a>
+
+            <div class="text-center mt-2">
+                <a asp-action="Index" class="link-back" style="color: #8d6e63; text-decoration: none; font-size: 0.9rem;">
+                    ← Înapoi la listă
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div style="height: 100px;"></div>

@@ -1,0 +1,210 @@
+﻿@model IEnumerable<Proiect_Cafenea.Models.Client>
+
+@{
+    ViewData["Title"] = "Clienți Cafenea";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    h1, .font-titlu {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+    }
+
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+   
+    .search-bar-container {
+        background-color: #efebe9;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #d7ccc8;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(62, 39, 35, 0.05);
+    }
+
+    .left-group {
+        display: flex;
+        gap: 10px;
+        flex-grow: 1;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-input {
+        background-color: #ffffff;
+        border: 1px solid #d7ccc8;
+        padding: 8px 15px;
+        border-radius: 4px;
+        min-width: 250px;
+        color: #4e342e;
+    }
+
+    .btn-brown {
+        background-color: #3e2723;
+        color: #fff !important;
+        border: none;
+        padding: 8px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+        }
+
+    .btn-beige {
+        background-color: #d7ccc8;
+        color: #3e2723;
+        border: 1px solid #a1887f;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    
+    .table-container {
+        background-color: #fff8e1;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(62, 39, 35, 0.1);
+        border: 1px solid #d7ccc8;
+    }
+
+    .premium-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .premium-table thead {
+            background-color: #efebe9; 
+        }
+
+        .premium-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            color: #3e2723 !important; 
+            border-bottom: 3px solid #a1887f;
+        }
+
+            .premium-table th a {
+                color: #3e2723 !important; 
+                text-decoration: none;
+            }
+
+        .premium-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #d7ccc8;
+            color: #3e2723;
+            vertical-align: middle;
+        }
+
+        .premium-table tbody tr:hover {
+            background-color: #efebe9;
+        }
+
+    .link-mic {
+        color: #8d6e63;
+        text-decoration: none;
+        margin: 0 4px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+        .link-mic:hover {
+            color: #3e2723;
+            text-decoration: underline;
+        }
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-3 font-titlu" style="color:#3e2723;">Clienții Cafenelei</h1>
+    <p class="text-muted fst-italic">Lista clienților și datele de contact</p>
+</div>
+
+<div class="container">
+    <div class="search-bar-container">
+        <form asp-action="Index" method="get" class="left-group">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" placeholder="Caută după nume...">
+            <button type="submit" class="btn-beige">Căutare</button>
+            @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"] as string))
+            {
+                <a asp-action="Index" class="link-reset" style="color: #8d6e63; text-decoration: none; font-size: 0.9rem; margin-left: 10px;">Reset</a>
+            }
+        </form>
+        <div>
+            <a asp-action="Create" class="btn-brown">+ Adaugă client nou</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-container">
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Nume Client</a>
+                        </th>
+                        <th>Adresă Email</th>
+                        <th style="text-align: right;">Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-weight: bold;">@Html.DisplayFor(modelItem => item.Nume)</td>
+                            <td style="font-style: italic; color: #5d4037;">@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td style="text-align: right;">
+                             
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="link-mic">Editează</a>
+                                <span style="color:#ccc">|</span>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="link-mic">Detalii</a>
+                                <span style="color:#ccc">|</span>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="link-mic" style="color:#c62828">Șterge</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mt-5 p-5" style="border: 2px dashed #d7ccc8; background: #efebe9; border-radius: 10px;">
+            <h3 class="font-titlu" style="color: #3e2723;">Nu s-au găsit clienți.</h3>
+        </div>
+    }
+</div>
+
+<div style="height: 100px;"></div>

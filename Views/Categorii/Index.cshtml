@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Proiect_Cafenea.Models.Categorie>
+
+@{
+    ViewData["Title"] = "Categorii de produse";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  
+    body {
+        background-color: #f4eadd;
+        font-family: 'Merriweather', serif;
+        color: #4e342e;
+    }
+
+    h1, .font-titlu {
+        font-family: 'Cinzel Decorative', cursive;
+    }
+
+ 
+    .page-header-container {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #d7ccc8;
+    }
+
+    .actions-bar {
+        background-color: #efebe9;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #d7ccc8;
+        display: flex;
+        justify-content: center; 
+        margin-bottom: 40px;
+        box-shadow: 0 4px 6px rgba(62, 39, 35, 0.05);
+    }
+
+    
+    .btn-brown {
+        background-color: #3e2723;
+        color: #ffca28;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+        text-transform: uppercase;
+        display: inline-block;
+    }
+
+        .btn-brown:hover {
+            background-color: #5d4037;
+            color: #fff;
+        }
+
+  
+    .card-categorie {
+        background-color: #efebe9;
+        border: 1px solid #d7ccc8;
+        border-radius: 8px;
+        padding: 40px 20px; 
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.3s, border-color 0.3s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+        .card-categorie:hover {
+            transform: translateY(-5px);
+            border-color: #a1887f;
+            box-shadow: 0 10px 15px rgba(62, 39, 35, 0.1);
+        }
+
+        .card-categorie::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: #d7ccc8;
+            margin: 15px auto;
+            transition: width 0.3s;
+        }
+
+        .card-categorie:hover::after {
+            width: 100px; 
+            background-color: #a1887f;
+        }
+
+    .nume-categorie {
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 1.8rem;
+        color: #3e2723;
+        margin-bottom: 20px;
+    }
+
+   
+    .actions-links {
+        margin-top: auto;
+        font-size: 0.9rem;
+    }
+
+    .link-mic {
+        color: #8d6e63;
+        text-decoration: none;
+        margin: 0 8px;
+        transition: color 0.2s;
+    }
+
+        .link-mic:hover {
+            color: #3e2723;
+            font-weight: bold;
+        }
+
+        .link-mic.delete:hover {
+            color: #c62828;
+        }
+
+</style>
+
+<div class="page-header-container">
+    <h1 class="display-3 font-titlu" style="color:#3e2723;">Categorii de produse</h1>
+    <p class="text-muted fst-italic">Organizează meniul în secțiuni distincte</p>
+</div>
+
+<div class="container">
+
+    <div class="actions-bar">
+        <a asp-action="Create" class="btn-brown">
+            + Adaugă Categorie Nouă
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card-categorie">
+
+                    <h2 class="nume-categorie">
+                        @Html.DisplayFor(modelItem => item.Nume)
+                    </h2>
+
+                    <div class="actions-links">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="link-mic">Editează</a>
+                        <span style="color:#d7ccc8">|</span>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="link-mic">Detalii</a>
+                        <span style="color:#d7ccc8">|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="link-mic delete">Șterge</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+<div style="height: 100px;"></div>
