@@ -1,0 +1,197 @@
+﻿{
+  "Scenario": "Recommendation",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "C:\\Users\\Loreni\\Desktop\\cafenea.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "ClientID",
+        "ColumnPurpose": "User",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "ProdusID",
+        "ColumnPurpose": "Item",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Frecventa",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Timestamp",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -1.730992799237443,
+        "RuntimeInSeconds": 2.161,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e1": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e2": {
+            "LabelColumnName": "Frecventa",
+            "MatrixColumnIndexColumnName": "ClientID",
+            "MatrixRowIndexColumnName": "ProdusID",
+            "ApproximationRank": 10,
+            "LearningRate": 0.1621652825150495,
+            "NumberOfIterations": 325,
+            "Quiet": true
+          },
+          "e3": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID"
+          },
+          "e4": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -2.1833881853489161,
+        "RuntimeInSeconds": 1.497,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e1": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e2": {
+            "LabelColumnName": "Frecventa",
+            "MatrixColumnIndexColumnName": "ClientID",
+            "MatrixRowIndexColumnName": "ProdusID",
+            "ApproximationRank": 24,
+            "LearningRate": 0.20163941067164154,
+            "NumberOfIterations": 217,
+            "Quiet": true
+          },
+          "e3": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID"
+          },
+          "e4": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "MatrixFactorization",
+        "Score": -2.2585320727756359,
+        "RuntimeInSeconds": 1.183,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e1": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e2": {
+            "LabelColumnName": "Frecventa",
+            "MatrixColumnIndexColumnName": "ClientID",
+            "MatrixRowIndexColumnName": "ProdusID",
+            "ApproximationRank": 76,
+            "LearningRate": 0.25072229582946437,
+            "NumberOfIterations": 144,
+            "Quiet": true
+          },
+          "e3": {
+            "OutputColumnName": "ClientID",
+            "InputColumnName": "ClientID"
+          },
+          "e4": {
+            "OutputColumnName": "ProdusID",
+            "InputColumnName": "ProdusID"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "MapValueToKey",
+      "e1": "MapValueToKey",
+      "e2": "MatrixFactorization",
+      "e3": "MapKeyToValue",
+      "e4": "MapKeyToValue"
+    },
+    "Schema": "e0 * e1 * e2 * e3 * e4",
+    "MetricName": "RSquared",
+    "ModelFilePath": "D:\\Medii de programare\\Proiect_Cafenea\\RecomandareProduse.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "RecommendationTrainingOption",
+    "TrainingTime": 10,
+    "LabelColumn": "Frecventa",
+    "UserIdColumn": "ClientID",
+    "ItemIdColumn": "ProdusID",
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}
