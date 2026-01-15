@@ -8,6 +8,9 @@
 using grpc = global::Grpc.Core;
 
 namespace Cafenea.GrpcStatus {
+  /// <summary>
+  /// Serviciul de verificare (Contractul)
+  /// </summary>
   public static partial class OrderStatus
   {
     static readonly string __ServiceName = "status.OrderStatus";
@@ -68,6 +71,12 @@ namespace Cafenea.GrpcStatus {
     [grpc::BindServiceMethod(typeof(OrderStatus), "BindService")]
     public abstract partial class OrderStatusBase
     {
+      /// <summary>
+      /// Metoda Unary: Trimitem un ID (produs/comanda) și primim detalii [cite: 36, 40]
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Cafenea.GrpcStatus.OrderReply> GetStatus(global::Cafenea.GrpcStatus.OrderRequest request, grpc::ServerCallContext context)
       {

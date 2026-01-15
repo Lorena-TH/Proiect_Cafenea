@@ -3,14 +3,14 @@ using Cafenea.GrpcStatus;
 
 namespace Cafenea.GrpcStatus.Services
 {
-    
+
     public class OrderStatusService : OrderStatus.OrderStatusBase
     {
         public override Task<OrderReply> GetStatus(OrderRequest request, ServerCallContext context)
         {
             var reply = new OrderReply();
 
-            // stabilim stocul in functie de id-ul produsului
+
             if (request.OrderId % 3 == 0)
             {
                 reply.Mesaj = "STOC EPUIZAT! Aprovizionare necesară.";

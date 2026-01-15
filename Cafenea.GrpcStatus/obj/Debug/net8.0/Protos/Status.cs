@@ -41,6 +41,9 @@ namespace Cafenea.GrpcStatus {
 
   }
   #region Messages
+  /// <summary>
+  /// Mesajul trimis de client (Site-ul tău) [cite: 43-45]
+  /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class OrderRequest : pb::IMessage<OrderRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -231,6 +234,9 @@ namespace Cafenea.GrpcStatus {
 
   }
 
+  /// <summary>
+  /// Mesajul trimis de server (Proiectul gRPC) [cite: 47-50]
+  /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class OrderReply : pb::IMessage<OrderReply>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -281,6 +287,9 @@ namespace Cafenea.GrpcStatus {
     /// <summary>Field number for the "mesaj" field.</summary>
     public const int MesajFieldNumber = 1;
     private string mesaj_ = "";
+    /// <summary>
+    /// Aici vom pune Numele Produsului
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Mesaj {
@@ -293,6 +302,9 @@ namespace Cafenea.GrpcStatus {
     /// <summary>Field number for the "timpEstimativ" field.</summary>
     public const int TimpEstimativFieldNumber = 2;
     private string timpEstimativ_ = "";
+    /// <summary>
+    /// Aici vom pune Prețul (RON)
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string TimpEstimativ {
@@ -305,6 +317,9 @@ namespace Cafenea.GrpcStatus {
     /// <summary>Field number for the "esteGata" field.</summary>
     public const int EsteGataFieldNumber = 3;
     private bool esteGata_;
+    /// <summary>
+    /// Aici punem true/false dacă produsul există
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool EsteGata {
