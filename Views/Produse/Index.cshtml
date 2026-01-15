@@ -1,12 +1,7 @@
-﻿@model IEnumerable<Proiect_Cafenea.Models.Produs>
+﻿ @model IEnumerable<Proiect_Cafenea.Models.Produs>
 
 @{
-    ViewData["Title"] = "Meniu Cafenea";
-}
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-<style>
+    ViewData["Title"] = "Meniu Cafenea";}<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"><style>
  
      body {
           
@@ -188,15 +183,9 @@
     .mt-2 span {
         color: #ccc;
         margin: 0 2px;
-    }
-</style>
-
-<div class="page-header-container">
+    }</style><div class="page-header-container">
     <h1 class="display-3 font-titlu" style="color:#3e2723;">Meniu Cafenea</h1>
-    <p class="text-muted fst-italic">Administrează produsele și stocurile </p>
-</div>
-
-<div class="container">
+    <p class="text-muted fst-italic">Administrează produsele și stocurile </p></div><div class="container">
 
     <div class="search-bar-container">
         <form asp-action="Index" method="get" class="left-group">
@@ -264,6 +253,4 @@
         <div class="text-center mt-5 p-5" style="border: 2px dashed #d7ccc8; background: #fff8e1; border-radius: 10px;">
             <h3 class="font-titlu" style="color: #5d4037;">Nu s-au găsit produse.</h3>
         </div>
-    }
-</div>
-<div style="height: 100px;"></div>
+    }</div><div style="height: 100px;"></div>

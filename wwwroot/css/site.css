@@ -1,17 +1,17 @@
-﻿/* 1. IMPORT FONTURI */
+﻿
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;700&display=swap');
 
-/* 2. VARIABILE DIN PALETA ALEASĂ (image_dfe872.png) */
+
 :root {
-    --color-cream: #F7F2E7; /* Fundal pagină */
-    --color-beige-l: #efebe9; /* Accente deschise */
-    --color-beige-m: #D9B68C; /* Bej mediu */
-    --color-copper: #A65E2E; /* NUANȚA 2: Pentru starea de Hover */
-    --color-espresso: #4E3B31; /* NUANȚA 1: Pentru starea Pasivă (cea mai închisă) */
+    --color-cream: #F7F2E7; /* fundal pagina */
+    --color-beige-l: #efebe9; /* accente deschise */
+    --color-beige-m: #D9B68C; /* bej mediu */
+    --color-copper: #A65E2E; /* pt starea de hover */
+    --color-espresso: #4E3B31; /* pentru starea pasiva */
     --color-white: #ffffff;
 }
 
-/* 3. SETĂRI GENERALE */
+
 body {
     background-color: var(--color-cream) !important;
     color: var(--color-espresso) !important;
@@ -24,9 +24,9 @@ h1, h2, h3, .font-titlu {
     color: var(--color-espresso) !important;
 }
 
-/* 4. BUTOANE CU LOGICA CERUTĂ: ESPRESSO -> COPPER */
+
 .btn-brown, .btn-primary, .btn-stock, .btn-edit-full, button[type="submit"] {
-    /* STARE PASIVĂ: Maro cel mai închis (#4E3B31) */
+    
     background-color: var(--color-espresso) !important;
     color: var(--color-white) !important;
     border: none !important;
@@ -43,14 +43,14 @@ h1, h2, h3, .font-titlu {
 }
 
     .btn-brown:hover, .btn-primary:hover, .btn-stock:hover, .btn-edit-full:hover, button[type="submit"]:hover {
-        /* STARE ACTIVĂ (HOVER): A doua nuanță din imagine (#A65E2E) */
+        
         background-color: var(--color-copper) !important;
         color: var(--color-white) !important;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(166, 94, 46, 0.2);
     }
 
-/* 5. SIDEBAR / NAVBAR */
+
 .sidebar, .navbar-dark, .bg-dark {
     background-color: var(--color-espresso) !important;
 }
@@ -62,8 +62,6 @@ h1, h2, h3, .font-titlu {
 
 
 
-/*TABEL*/
-/* --- TABEL PREMIUM --- */
 .premium-table {
     width: 100%;
     border-collapse: collapse;
@@ -71,7 +69,7 @@ h1, h2, h3, .font-titlu {
 }
 
     .premium-table thead {
-        /* O nuanță foarte discretă pentru a separa zona de header */
+      
         background-color: rgba(78, 59, 49, 0.05) !important;
     }
 
@@ -83,7 +81,7 @@ h1, h2, h3, .font-titlu {
         font-weight: 800;
    
         letter-spacing: 1px;
-        border-bottom: 3px solid var(--color-copper) !important; /* Linia de accent */
+        border-bottom: 3px solid var(--color-copper) !important; 
         font-size: 0.95rem;
     }
 
@@ -96,25 +94,16 @@ h1, h2, h3, .font-titlu {
             cursor: pointer;
         }
 
-/* Containerul tabelului cu fundalul tău preferat */
+
 .table-container {
-    background-color: var(--color-beige-l) !important; /* #efebe9 */
+    background-color: var(--color-beige-l) !important; 
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--color-beige-m);
     box-shadow: 0 4px 15px rgba(78, 59, 49, 0.08);
 }
 
-Absolut! Cea mai eficientă metodă este să muți regulile de stil din pagina Details sau Edit direct în fișierul global site.css. Astfel, orice pagină care folosește aceleași clase (.form-card, .input-premium, .control-label) va arăta identic, indiferent dacă editezi o Categorie, un Produs sau un Client.
 
-Iată cum trebuie să organizezi fișierele pentru a avea un design unitar automat peste tot:
-
-1. Actualizează wwwroot/css/site.css (Adaugă la final)
-Mutând aceste stiluri aici, ele devin „universale” pentru tot proiectul tău de cafenea.
-
-CSS
-/* --- STIL GLOBAL PENTRU TOATE FORMULARELE (Edit/Create) --- */
-/* Fundalul unitar #efebe9 pentru toate cardurile de editare/creare */
 .form-card {
     background-color: var(--color-beige-l) !important;
     border: 1px solid var(--color-beige-m) !important;
@@ -125,7 +114,6 @@ CSS
     box-shadow: 0 4px 15px rgba(78, 59, 49, 0.08);
 }
 
-/* Etichetele boldate (Nume Categorie, Preț, etc.) */
 .control-label {
     font-family: 'Playfair Display', serif !important;
     font-size: 1.2rem;
@@ -135,7 +123,7 @@ CSS
     display: block;
 }
 
-/* Stilul pentru câmpurile de text (Inputs) */
+
 .input-premium {
     width: 100%;
     padding: 12px 15px;
@@ -153,7 +141,7 @@ CSS
         box-shadow: 0 0 8px rgba(166, 94, 46, 0.2);
     }
 
-/* Container pentru butoanele de acțiune din formulare */
+
 .form-actions {
     margin-top: 25px;
     display: flex;
@@ -162,11 +150,11 @@ CSS
 }
 
 
-/* --- SIDEBAR MINIMALIST PREMIUM --- */
+
 .sidebar-minimal {
     min-width: 80px;
     max-width: 80px;
-    /* Folosim variabila ta Espresso pentru continuitate vizuală */
+
     background-color: var(--color-espresso) !important;
     height: 100vh;
     position: fixed;
@@ -176,14 +164,13 @@ CSS
     border-right: 1px solid var(--color-beige-m);
 }
 
-    /* Efect de expandare la hover */
     .sidebar-minimal:hover {
         min-width: 240px;
         max-width: 240px;
         box-shadow: 10px 0 25px rgba(78, 59, 49, 0.15);
     }
 
-/* Link-urile din sidebar folosind culorile tale pasive */
+
 .sidebar-link {
     color: var(--color-beige-l) !important;
     text-decoration: none;
@@ -194,13 +181,13 @@ CSS
     white-space: nowrap;
 }
 
-    /* Efectul de HOVER: Trecere la variabila Copper (logica butoanelor tale) */
+    
     .sidebar-link:hover {
         background-color: var(--color-copper) !important;
         color: var(--color-white) !important;
     }
 
-    /* Stil pentru elementul activ (pagina curentă) */
+    
     .sidebar-link.active {
         background-color: rgba(166, 94, 46, 0.2);
         color: var(--color-white) !important;
@@ -225,7 +212,7 @@ CSS
     opacity: 1;
 }
 
-/* Ajustare Main - asigură că dashboard-ul nu este acoperit */
+
 main {
     margin-left: 80px;
     transition: margin-left 0.3s ease;

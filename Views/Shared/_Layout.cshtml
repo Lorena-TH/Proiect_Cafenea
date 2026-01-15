@@ -100,8 +100,10 @@
             transition: margin-left 0.3s ease;
         }
 
-      
-         .sidebar-minimal:hover + main { margin-left: 240px; } 
+        
+        .sidebar-minimal:hover ~ main {
+            margin-left: 240px;
+        }
     </style>
 </head>
 <body>
@@ -144,6 +146,7 @@
                         <i class="bi bi-shield-lock"></i>
                         <span class="link-text">Privacy</span>
                     </a>
+
                 </div>
             </nav>
 

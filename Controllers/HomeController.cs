@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using Proiect_Cafenea.Models;
 using Proiect_Cafenea.Data;
 
@@ -30,7 +30,7 @@ namespace Proiect_Cafenea.Controllers
         .Select(g => new CategorieStat
         {
             NumeCategorie = g.Key ?? "Altele",
-           
+
             NumarProduse = (int)g.Sum(dc => dc.Cantitate * dc.Produs.Pret)
         })
         .ToListAsync();
@@ -43,7 +43,7 @@ namespace Proiect_Cafenea.Controllers
                 CategoriiStats = categoriiStats
             };
 
-            return View(viewModel); 
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
